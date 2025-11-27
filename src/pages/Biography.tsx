@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import TableOfContents from "@/components/TableOfContents";
 import ImageModal from "@/components/ImageModal";
-import MobileMenu from "@/components/MobileMenu"; // Import the new MobileMenu component
+import MobileMenu from "@/components/MobileMenu";
+import { cn } from "@/lib/utils"; // Import cn for conditional class names
 
 interface ImageItem {
   src: string;
@@ -28,6 +29,14 @@ const sectionImages: { [key: string]: ImageItem } = {
 const Biography = () => {
   const [activeSectionId, setActiveSectionId] = useState<string | undefined>(undefined);
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  const imageRefs = useRef<{ [key: string]: HTMLImageElement | null }>({});
+  const [visibleImages, setVisibleImages] = useState<Record<string, boolean>>(() => {
+    const initialState: Record<string, boolean> = {};
+    biographySections.forEach(section => {
+      initialState[section.id] = false;
+    });
+    return initialState;
+  });
 
   const [selectedImageForModal, setSelectedImageForModal] = useState<ImageItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,6 +46,7 @@ const Biography = () => {
     setIsModalOpen(true);
   };
 
+  // Effect for active section tracking
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -69,6 +79,40 @@ const Biography = () => {
     };
   }, []);
 
+  // Effect for image visibility on scroll
+  useEffect(() => {
+    const imageObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setVisibleImages((prev) => ({
+            ...prev,
+            [entry.target.id]: entry.isIntersecting,
+          }));
+        });
+      },
+      {
+        threshold: 0.3, // Image becomes visible when 30% of it is in view
+        rootMargin: "0px 0px -100px 0px", // Adjust as needed for when it should appear
+      }
+    );
+
+    biographySections.forEach((section) => {
+      const ref = imageRefs.current[section.id];
+      if (ref) {
+        imageObserver.observe(ref);
+      }
+    });
+
+    return () => {
+      biographySections.forEach((section) => {
+        const ref = imageRefs.current[section.id];
+        if (ref) {
+          imageObserver.unobserve(ref);
+        }
+      });
+    };
+  }, []);
+
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-12 font-sans">
       {/* Mobile Menu for small screens */}
@@ -89,9 +133,14 @@ const Biography = () => {
           <h2 className="text-4xl font-serif font-semibold mb-6 text-gray-800 dark:text-gray-200">Early Life and Childhood</h2>
           {sectionImages["early-life"] && (
             <img
+              id="early-life" // Add ID for image observer
+              ref={(el) => (imageRefs.current["early-life"] = el)}
               src={sectionImages["early-life"].src}
               alt={sectionImages["early-life"].alt}
-              className="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer mb-6 transition-transform duration-300 hover:scale-[1.01]"
+              className={cn(
+                "w-full h-64 object-cover rounded-lg shadow-md cursor-pointer mb-6 transition-opacity duration-700 ease-in-out",
+                visibleImages["early-life"] ? "opacity-100" : "opacity-0"
+              )}
               onClick={() => handleImageClick(sectionImages["early-life"])}
             />
           )}
@@ -107,9 +156,14 @@ const Biography = () => {
           <h2 className="text-4xl font-serif font-semibold mb-6 text-gray-800 dark:text-gray-200">Formative Years and Education</h2>
           {sectionImages["formative-years"] && (
             <img
+              id="formative-years" // Add ID for image observer
+              ref={(el) => (imageRefs.current["formative-years"] = el)}
               src={sectionImages["formative-years"].src}
               alt={sectionImages["formative-years"].alt}
-              className="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer mb-6 transition-transform duration-300 hover:scale-[1.01]"
+              className={cn(
+                "w-full h-64 object-cover rounded-lg shadow-md cursor-pointer mb-6 transition-opacity duration-700 ease-in-out",
+                visibleImages["formative-years"] ? "opacity-100" : "opacity-0"
+              )}
               onClick={() => handleImageClick(sectionImages["formative-years"])}
             />
           )}
@@ -125,9 +179,14 @@ const Biography = () => {
           <h2 className="text-4xl font-serif font-semibold mb-6 text-gray-800 dark:text-gray-200">Career and Major Achievements</h2>
           {sectionImages["career-achievements"] && (
             <img
+              id="career-achievements" // Add ID for image observer
+              ref={(el) => (imageRefs.current["career-achievements"] = el)}
               src={sectionImages["career-achievements"].src}
               alt={sectionImages["career-achievements"].alt}
-              className="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer mb-6 transition-transform duration-300 hover:scale-[1.01]"
+              className={cn(
+                "w-full h-64 object-cover rounded-lg shadow-md cursor-pointer mb-6 transition-opacity duration-700 ease-in-out",
+                visibleImages["career-achievements"] ? "opacity-100" : "opacity-0"
+              )}
               onClick={() => handleImageClick(sectionImages["career-achievements"])}
             />
           )}
@@ -146,9 +205,14 @@ const Biography = () => {
           <h2 className="text-4xl font-serif font-semibold mb-6 text-gray-800 dark:text-gray-200">Later Life and Legacy</h2>
           {sectionImages["later-life-legacy"] && (
             <img
+              id="later-life-legacy" // Add ID for image observer
+              ref={(el) => (imageRefs.current["later-life-legacy"] = el)}
               src={sectionImages["later-life-legacy"].src}
               alt={sectionImages["later-life-legacy"].alt}
-              className="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer mb-6 transition-transform duration-300 hover:scale-[1.01]"
+              className={cn(
+                "w-full h-64 object-cover rounded-lg shadow-md cursor-pointer mb-6 transition-opacity duration-700 ease-in-out",
+                visibleImages["later-life-legacy"] ? "opacity-100" : "opacity-0"
+              )}
               onClick={() => handleImageClick(sectionImages["later-life-legacy"])}
             />
           )}
