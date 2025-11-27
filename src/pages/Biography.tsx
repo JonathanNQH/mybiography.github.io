@@ -13,17 +13,21 @@ interface ImageItem {
 }
 
 const biographySections = [
-  { id: "early-life", title: "Early Life and Childhood" },
-  { id: "formative-years", title: "Formative Years and Education" },
-  { id: "career-achievements", title: "Career and Major Achievements" },
-  { id: "later-life-legacy", title: "Later Life and Legacy" },
+  { id: "personal-introduction", title: "Personal Introduction" },
+  { id: "profession-skills", title: "Profession & Skills" },
+  { id: "experience", title: "Experience" },
+  { id: "involvement", title: "Involvement" },
+  { id: "qualification", title: "Qualification" },
+  { id: "self-development", title: "Self Development" },
 ];
 
 const sectionImages: { [key: string]: ImageItem } = {
-  "early-life": { src: "https://picsum.photos/id/237/600/400", alt: "Childhood Home" },
-  "formative-years": { src: "https://picsum.photos/id/1018/600/400", alt: "University Campus" },
-  "career-achievements": { src: "https://picsum.photos/id/1040/600/400", alt: "Award Ceremony" },
-  "later-life-legacy": { src: "https://picsum.photos/id/1074/600/400", alt: "Reflective Study" },
+  "personal-introduction": { src: "https://picsum.photos/id/237/600/400", alt: "Personal Introduction" },
+  "profession-skills": { src: "https://picsum.photos/id/1018/600/400", alt: "Profession & Skills" },
+  "experience": { src: "https://picsum.photos/id/1040/600/400", alt: "Experience" },
+  "involvement": { src: "https://picsum.photos/id/1074/600/400", alt: "Involvement" },
+  "qualification": { src: "https://picsum.photos/id/1005/600/400", alt: "Qualification" },
+  "self-development": { src: "https://picsum.photos/id/1006/600/400", alt: "Self Development" },
 };
 
 const Biography = () => {
@@ -153,46 +157,66 @@ const Biography = () => {
               )}
               <div className="md:w-1/2">
                 {/* Placeholder text - replace with actual content for each section */}
-                {section.id === "early-life" && (
+                {section.id === "personal-introduction" && (
                   <>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
-                      Born in a small, vibrant village nestled in the heart of rolling hills, our subject's early years were marked by curiosity and an insatiable thirst for knowledge. From a young age, they displayed an extraordinary aptitude for observation, often spending hours exploring the natural world around them, meticulously documenting their findings in a worn leather-bound journal. Their family, though modest, fostered an environment of intellectual freedom and encouraged their burgeoning talents.
+                      Welcome to my personal biography. I am a passionate individual dedicated to continuous learning and making a positive impact. My journey has been shaped by diverse experiences and a relentless pursuit of knowledge.
                     </p>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                      School was not merely a place of learning but a playground for their mind. They excelled in every subject, particularly in sciences and arts, often challenging conventional wisdom and proposing innovative solutions to complex problems. This early period laid the foundation for a life dedicated to discovery and creative expression.
+                      I believe in the power of collaboration and innovation to solve complex challenges and drive meaningful change in the world.
                     </p>
                   </>
                 )}
-                {section.id === "formative-years" && (
+                {section.id === "profession-skills" && (
                   <>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
-                      As they transitioned into adolescence, their intellectual pursuits deepened. They left their village to attend a prestigious academy, where they specialized in theoretical physics and classical literature. It was during these years that they developed their unique interdisciplinary approach, believing that true understanding emerged from the synthesis of diverse fields. Their professors often spoke of their unparalleled ability to connect seemingly disparate concepts, weaving them into a coherent and compelling narrative.
+                      My professional background spans several dynamic fields, where I've honed a versatile skill set. I specialize in [mention a key profession/area, e.g., software development, project management, creative design] with a strong foundation in [mention 2-3 core skills, e.g., problem-solving, strategic planning, communication].
                     </p>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                      Beyond academics, they were also deeply involved in community service, organizing initiatives to promote literacy and environmental conservation. These experiences instilled in them a profound sense of social responsibility, shaping their future endeavors.
+                      I am proficient in [list specific tools/technologies, e.g., React, TypeScript, Agile methodologies] and constantly seek to expand my expertise through new challenges.
                     </p>
                   </>
                 )}
-                {section.id === "career-achievements" && (
+                {section.id === "experience" && (
                   <>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
-                      Upon completing their education, they embarked on a career that would redefine their field. Their groundbreaking research in quantum mechanics led to several paradigm shifts, earning them international acclaim and numerous accolades, including the coveted Nobel Prize. Yet, they remained humble, always attributing their success to collaborative efforts and the support of their peers.
+                      Throughout my career, I've had the privilege of working on impactful projects and contributing to various organizations. My experience includes [mention a key role/achievement, e.g., leading a cross-functional team to launch a successful product, optimizing operational workflows, developing innovative solutions].
                     </p>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
-                      Not content with purely scientific pursuits, they also dedicated a significant portion of their life to humanitarian causes. They founded several non-profit organizations focused on global health and education, impacting millions of lives across continents. Their ability to inspire and mobilize others was legendary, turning ambitious visions into tangible realities.
+                      Each role has provided valuable lessons in leadership, adaptability, and delivering results in fast-paced environments. I thrive on challenges that push the boundaries of what's possible.
                     </p>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                      Their work was characterized by an unwavering commitment to ethical principles and a deep empathy for the human condition. They believed that true progress was measured not just by scientific advancement but by the betterment of society as a whole.
+                      I am particularly proud of [mention a specific project or outcome, e.g., increasing user engagement by X%, streamlining a critical process, mentoring junior colleagues].
                     </p>
                   </>
                 )}
-                {section.id === "later-life-legacy" && (
+                {section.id === "involvement" && (
                   <>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
-                      In their later years, they retreated from the public eye, choosing to spend their time mentoring young scholars and writing philosophical treatises. Their memoirs, published posthumously, offered profound insights into their journey, their struggles, and their ultimate triumphs. They passed away peacefully, leaving behind a legacy that continues to inspire generations.
+                      Beyond my professional work, I am actively involved in community initiatives and volunteer efforts. I believe in giving back and contributing to causes that resonate with my values. My involvement includes [mention a type of involvement, e.g., volunteering at local charities, participating in industry mentorship programs, contributing to open-source projects].
                     </p>
                     <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                      Their life serves as a testament to the power of intellect, compassion, and perseverance. They taught us that the pursuit of knowledge and the service of humanity are not mutually exclusive but are, in fact, deeply intertwined. Their impact on the world is immeasurable, a beacon of hope and inspiration for all who strive to make a difference.
+                      These experiences have enriched my perspective and allowed me to connect with diverse groups of people, fostering a sense of shared purpose and collective growth.
+                    </p>
+                  </>
+                )}
+                {section.id === "qualification" && (
+                  <>
+                    <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
+                      My academic background and certifications provide a strong foundation for my expertise. I hold a [mention degree, e.g., Bachelor's in Computer Science, Master's in Business Administration] from [mention institution].
+                    </p>
+                    <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                      Additionally, I have obtained certifications in [list relevant certifications, e.g., Project Management Professional (PMP), AWS Certified Developer, UX/UI Design Specialist], demonstrating my commitment to continuous professional development.
+                    </p>
+                  </>
+                )}
+                {section.id === "self-development" && (
+                  <>
+                    <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
+                      Self-development is a cornerstone of my personal and professional philosophy. I am constantly seeking opportunities to learn new skills, explore emerging technologies, and refine my understanding of the world. This includes [mention a self-development activity, e.g., regularly attending workshops and conferences, reading extensively on various subjects, practicing mindfulness and meditation].
+                    </p>
+                    <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                      I am a firm believer that growth is a lifelong journey, and I embrace every opportunity to evolve and improve.
                     </p>
                   </>
                 )}
