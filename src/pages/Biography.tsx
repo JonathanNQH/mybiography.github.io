@@ -94,7 +94,7 @@ const Biography = () => {
             )}>
               {section.id === "personal-introduction" && (
                 <div className="md:w-1/3 flex justify-center">
-                  <ProfileImage src="/placeholder.svg" alt="NG QI HENG Profile" /> {/* Placeholder image */}
+                  <ProfileImage src="/profile.png" alt="NG QI HENG Profile" /> {/* Updated to use the new image */}
                 </div>
               )}
               <div className={cn("md:w-full", section.id === "personal-introduction" && "md:w-2/3")}> {/* Adjusted width for personal intro */}

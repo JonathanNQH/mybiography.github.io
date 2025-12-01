@@ -11,7 +11,7 @@ interface ProfileImageProps {
 
 const ProfileImage: React.FC<ProfileImageProps> = ({ src, alt, className }) => {
   return (
-    <div className={cn("relative w-48 h-48 md:w-64 md:h-64 flex-shrink-0 rounded-full overflow-hidden shadow-lg border-4 border-primary-foreground", className)}>
+    <div className={cn("relative w-64 h-64 md:w-80 md:h-80 flex-shrink-0 rounded-lg overflow-hidden shadow-lg border-4 border-primary-foreground", className)}>
       <img
         src={src}
         alt={alt}
