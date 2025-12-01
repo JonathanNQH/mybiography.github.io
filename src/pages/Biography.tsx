@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import TableOfContents from "@/components/TableOfContents";
 import MobileMenu from "@/components/MobileMenu";
 import ProfileImage from "@/components/ProfileImage";
-import ImageModal from "@/components/ImageModal"; // Import the new ImageModal component
+import ImageModal from "@/components/ImageModal";
 import { cn } from "@/lib/utils";
 
 
@@ -149,18 +149,22 @@ const Biography = () => {
                     <h3 className="text-2xl font-serif font-semibold mb-3 text-foreground">Work Experience</h3>
                     <div className="mb-6">
                       <p className="font-semibold text-xl text-foreground">Café Waiter <span className="text-base font-normal text-muted-foreground float-right">2018</span></p>
-                      <div className="flex justify-center my-4">
-                        <img
-                          src="/cafe-waiter.jpg"
-                          alt="Cafe Waiter Experience"
-                          className="w-48 h-48 object-cover rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-105"
-                          onClick={() => openImageModal("/cafe-waiter.jpg", "Cafe Waiter Experience")}
-                        />
+                      <div className="flex flex-col md:flex-row items-center md:items-start gap-6 my-4">
+                        <div className="flex-shrink-0">
+                          <img
+                            src="/cafe-waiter.jpg"
+                            alt="Cafe Waiter Experience"
+                            className="w-48 h-48 object-cover rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-105"
+                            onClick={() => openImageModal("/cafe-waiter.jpg", "Cafe Waiter Experience")}
+                          />
+                        </div>
+                        <div className="flex-grow">
+                          {renderBulletPoints([
+                            "Take order, casher, clean the table after used.",
+                            "Understand customer needs, and customize the order based on the requirements.",
+                          ])}
+                        </div>
                       </div>
-                      {renderBulletPoints([
-                        "Take order, casher, clean the table after used.",
-                        "Understand customer needs, and customize the order based on the requirements.",
-                      ])}
                     </div>
                     <div className="mb-6">
                       <p className="font-semibold text-xl text-foreground">Baby Car Seat Promoter <span className="text-base font-normal text-muted-foreground float-right">2019</span></p>
@@ -314,18 +318,22 @@ const Biography = () => {
                     <div className="mb-6">
                       <p className="font-semibold text-xl text-foreground">Team Building</p>
                       <p className="text-lg leading-relaxed text-muted-foreground mb-2">Collaboration | Leadership</p>
-                      <div className="flex justify-center my-4">
-                        <img
-                          src="/team-building.jpg"
-                          alt="Team Building Activity"
-                          className="w-64 h-48 object-cover rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-105"
-                          onClick={() => openImageModal("/team-building.jpg", "Team Building Activity")}
-                        />
+                      <div className="flex flex-col md:flex-row items-center md:items-start gap-6 my-4">
+                        <div className="flex-shrink-0">
+                          <img
+                            src="/team-building.jpg"
+                            alt="Team Building Activity"
+                            className="w-64 h-48 object-cover rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-105"
+                            onClick={() => openImageModal("/team-building.jpg", "Team Building Activity")}
+                          />
+                        </div>
+                        <div className="flex-grow">
+                          {renderBulletPoints([
+                            "Participated in team-building activities to foster collaboration and leadership skills.",
+                            "Worked effectively in a group to achieve common goals and solve challenges.",
+                          ])}
+                        </div>
                       </div>
-                      {renderBulletPoints([
-                        "Participated in team-building activities to foster collaboration and leadership skills.",
-                        "Worked effectively in a group to achieve common goals and solve challenges.",
-                      ])}
                     </div>
                   </>
                 )}
