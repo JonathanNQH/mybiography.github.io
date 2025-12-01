@@ -3,8 +3,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import TableOfContents from "@/components/TableOfContents";
 import MobileMenu from "@/components/MobileMenu";
-import ProfileImage from "@/components/ProfileImage"; // Import the new ProfileImage component
-import { cn } from "@/lib/utils"; // Import cn for conditional class names
+import ProfileImage from "@/components/ProfileImage";
+import ImageModal from "@/components/ImageModal"; // Import the new ImageModal component
+import { cn } from "@/lib/utils";
 
 
 const biographySections = [
@@ -20,6 +21,8 @@ const biographySections = [
 const Biography = () => {
   const [activeSectionId, setActiveSectionId] = useState<string | undefined>(undefined);
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState({ src: "", alt: "" });
 
 
   // Effect for active section tracking
@@ -55,6 +58,10 @@ const Biography = () => {
     };
   }, []);
 
+  const openImageModal = (src: string, alt: string) => {
+    setCurrentImage({ src, alt });
+    setIsModalOpen(true);
+  };
 
   const renderBulletPoints = (items: string[]) => (
     <ul className="list-disc list-inside bg-card text-card-foreground border border-border rounded-lg p-4 space-y-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
@@ -89,15 +96,15 @@ const Biography = () => {
           <section key={section.id} id={section.id} className="mb-16" ref={(el) => (sectionRefs.current[section.id] = el)}>
             <h2 className="text-4xl font-serif font-semibold mb-6 text-primary">{section.title}</h2>
             <div className={cn(
-              "flex flex-col items-center md:flex-row md:items-start gap-8", // Adjusted for image and text layout
-              index % 2 === 1 ? "md:flex-row-reverse" : "" // Alternate image/text order
+              "flex flex-col items-center md:flex-row md:items-start gap-8",
+              index % 2 === 1 ? "md:flex-row-reverse" : ""
             )}>
               {section.id === "personal-introduction" && (
                 <div className="md:w-1/3 flex justify-center">
-                  <ProfileImage src="/profile.png" alt="NG QI HENG Profile" /> {/* Updated to use the new image */}
+                  <ProfileImage src="/profile.png" alt="NG QI HENG Profile" />
                 </div>
               )}
-              <div className={cn("md:w-full", section.id === "personal-introduction" && "md:w-2/3")}> {/* Adjusted width for personal intro */}
+              <div className={cn("md:w-full", section.id === "personal-introduction" && "md:w-2/3")}>
                 {section.id === "personal-introduction" && (
                   <>
                     <p className="text-lg leading-relaxed text-muted-foreground mb-4">
@@ -142,6 +149,14 @@ const Biography = () => {
                     <h3 className="text-2xl font-serif font-semibold mb-3 text-foreground">Work Experience</h3>
                     <div className="mb-6">
                       <p className="font-semibold text-xl text-foreground">Café Waiter <span className="text-base font-normal text-muted-foreground float-right">2018</span></p>
+                      <div className="flex justify-center my-4">
+                        <img
+                          src="/cafe-waiter.jpg"
+                          alt="Cafe Waiter Experience"
+                          className="w-48 h-48 object-cover rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-105"
+                          onClick={() => openImageModal("/cafe-waiter.jpg", "Cafe Waiter Experience")}
+                        />
+                      </div>
                       {renderBulletPoints([
                         "Take order, casher, clean the table after used.",
                         "Understand customer needs, and customize the order based on the requirements.",
@@ -296,6 +311,22 @@ const Biography = () => {
                         "Interactive and interesting user interface design to enhance the declaration system and reduce the manual processing.",
                       ])}
                     </div>
+                    <div className="mb-6">
+                      <p className="font-semibold text-xl text-foreground">Team Building</p>
+                      <p className="text-lg leading-relaxed text-muted-foreground mb-2">Collaboration | Leadership</p>
+                      <div className="flex justify-center my-4">
+                        <img
+                          src="/team-building.jpg"
+                          alt="Team Building Activity"
+                          className="w-64 h-48 object-cover rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-105"
+                          onClick={() => openImageModal("/team-building.jpg", "Team Building Activity")}
+                        />
+                      </div>
+                      {renderBulletPoints([
+                        "Participated in team-building activities to foster collaboration and leadership skills.",
+                        "Worked effectively in a group to achieve common goals and solve challenges.",
+                      ])}
+                    </div>
                   </>
                 )}
               </div>
@@ -303,6 +334,14 @@ const Biography = () => {
           </section>
         ))}
       </div>
+
+      {/* Image Modal */}
+      <ImageModal
+        src={currentImage.src}
+        alt={currentImage.alt}
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+      />
     </div>
   );
 };
