@@ -2,14 +2,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import TableOfContents from "@/components/TableOfContents";
-import ImageModal from "@/components/ImageModal";
 import MobileMenu from "@/components/MobileMenu";
 import { cn } from "@/lib/utils"; // Import cn for conditional class names
 
-interface ImageItem {
-  src: string;
-  alt: string;
-}
 
 const biographySections = [
   { id: "personal-introduction", title: "Personal Introduction" },
@@ -20,34 +15,11 @@ const biographySections = [
   { id: "self-development", title: "Self Development" },
 ];
 
-const sectionImages: { [key: string]: ImageItem } = {
-  "personal-introduction": { src: "/images/ng-qi-heng-passport.png", alt: "NG QI HENG Passport Photo" },
-  "profession-skills": { src: "https://picsum.photos/id/1018/600/400", alt: "Profession & Skills" },
-  "experience": { src: "https://picsum.photos/id/1040/600/400", alt: "Experience" },
-  "involvement": { src: "https://picsum.photos/id/1074/600/400", alt: "Involvement" },
-  "qualification": { src: "https://picsum.photos/id/1005/600/400", alt: "Qualification" },
-  "self-development": { src: "https://picsum.photos/id/1006/600/400", alt: "Self Development" },
-};
 
 const Biography = () => {
   const [activeSectionId, setActiveSectionId] = useState<string | undefined>(undefined);
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
-  const imageRefs = useRef<{ [key: string]: HTMLImageElement | null }>({});
-  const [visibleImages, setVisibleImages] = useState<Record<string, boolean>>(() => {
-    const initialState: Record<string, boolean> = {};
-    biographySections.forEach(section => {
-      initialState[section.id] = false;
-    });
-    return initialState;
-  });
 
-  const [selectedImageForModal, setSelectedImageForModal] = useState<ImageItem | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleImageClick = (image: ImageItem) => {
-    setSelectedImageForModal(image);
-    setIsModalOpen(true);
-  };
 
   // Effect for active section tracking
   useEffect(() => {
@@ -82,39 +54,6 @@ const Biography = () => {
     };
   }, []);
 
-  // Effect for image visibility on scroll
-  useEffect(() => {
-    const imageObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setVisibleImages((prev) => ({
-            ...prev,
-            [entry.target.id]: entry.isIntersecting,
-          }));
-        });
-      },
-      {
-        threshold: 0.3, // Image becomes visible when 30% of it is in view
-        rootMargin: "0px 0px -100px 0px", // Adjust as needed for when it should appear
-      }
-    );
-
-    biographySections.forEach((section) => {
-      const ref = imageRefs.current[section.id];
-      if (ref) {
-        imageObserver.observe(ref);
-      }
-    });
-
-    return () => {
-      biographySections.forEach((section) => {
-        const ref = imageRefs.current[section.id];
-        if (ref) {
-          imageObserver.unobserve(ref);
-        }
-      });
-    };
-  }, []);
 
   const renderBulletPoints = (items: string[]) => (
     <ul className="list-none p-0 space-y-2">
@@ -152,22 +91,7 @@ const Biography = () => {
               "flex flex-col md:flex-row items-start gap-8",
               index % 2 === 1 ? "md:flex-row-reverse" : "" // Alternate image/text order
             )}>
-              {sectionImages[section.id] && (
-                <div className="md:w-1/2 flex-shrink-0">
-                  <img
-                    id={section.id} // Add ID for image observer
-                    ref={(el) => (imageRefs.current[section.id] = el)}
-                    src={sectionImages[section.id].src}
-                    alt={sectionImages[section.id].alt}
-                    className={cn(
-                      "w-full h-64 object-cover rounded-lg shadow-md cursor-pointer transition-opacity duration-700 ease-in-out",
-                      visibleImages[section.id] ? "opacity-100" : "opacity-0"
-                    )}
-                    onClick={() => handleImageClick(sectionImages[section.id])}
-                  />
-                </div>
-              )}
-              <div className="md:w-1/2">
+              <div className="md:w-full"> {/* Adjusted to full width */}
                 {section.id === "personal-introduction" && (
                   <>
                     <p className="text-lg leading-relaxed text-muted-foreground mb-4">
@@ -373,15 +297,6 @@ const Biography = () => {
           </section>
         ))}
       </div>
-
-      {selectedImageForModal && (
-        <ImageModal
-          src={selectedImageForModal.src}
-          alt={selectedImageForModal.alt}
-          open={isModalOpen}
-          onOpenChange={setIsModalOpen}
-        />
-      )}
     </div>
   );
 };
