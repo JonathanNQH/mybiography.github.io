@@ -63,8 +63,11 @@ const Biography = () => {
     setIsModalOpen(true);
   };
 
-  const renderBulletPoints = (items: string[]) => (
-    <ul className="list-disc list-inside bg-card text-card-foreground border border-border rounded-lg p-4 space-y-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+  const renderBulletPoints = (items: string[], additionalClasses?: string) => (
+    <ul className={cn(
+      "list-disc list-inside bg-card text-card-foreground border border-border rounded-lg p-4 space-y-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg",
+      additionalClasses
+    )}>
       {items.map((item, i) => (
         <li
           key={i}
@@ -162,7 +165,7 @@ const Biography = () => {
                           {renderBulletPoints([
                             "Take order, casher, clean the table after used.",
                             "Understand customer needs, and customize the order based on the requirements.",
-                          ])}
+                          ], "h-48 overflow-y-auto")}
                         </div>
                       </div>
                     </div>
@@ -210,7 +213,7 @@ const Biography = () => {
                           {renderBulletPoints([
                             "Been through three years training as an Air force reserve officer cadet.",
                             "Follow the orders strictly and execute it with full of compliance.",
-                          ])}
+                          ], "h-48 overflow-y-auto")}
                         </div>
                       </div>
                     </div>
@@ -343,7 +346,7 @@ const Biography = () => {
                           {renderBulletPoints([
                             "Participated in team-building activities to foster collaboration and leadership skills.",
                             "Worked effectively in a group to achieve common goals and solve challenges.",
-                          ])}
+                          ], "h-48 overflow-y-auto")}
                         </div>
                       </div>
                     </div>
