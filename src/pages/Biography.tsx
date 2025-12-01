@@ -81,7 +81,7 @@ const Biography = () => {
       {/* Main Biography Content */}
       <div className="lg:col-span-1">
         <h1 className="text-6xl font-serif font-bold text-center mb-12 text-foreground leading-tight">
-          NG QI HENG Biography
+          Biography
         </h1>
 
         {biographySections.map((section, index) => (
