@@ -121,7 +121,7 @@ const Biography = () => {
       {items.map((item, i) => (
         <li
           key={i}
-          className="bg-card text-card-foreground border border-border rounded-md p-3 transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
+          className="bg-card text-card-foreground border border-border rounded-lg p-3 transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
         >
           {item}
         </li>
