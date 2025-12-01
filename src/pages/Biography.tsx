@@ -56,11 +56,11 @@ const Biography = () => {
 
 
   const renderBulletPoints = (items: string[]) => (
-    <ul className="list-none p-0 space-y-2">
+    <ul className="list-disc list-inside bg-card text-card-foreground border border-border rounded-lg p-4 space-y-2">
       {items.map((item, i) => (
         <li
           key={i}
-          className="bg-card text-card-foreground border border-border rounded-lg p-3 transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
+          className="text-lg leading-relaxed" // Removed individual framing and hover
         >
           {item}
         </li>
