@@ -9,7 +9,7 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className }) => {
   return (
-    <div className={cn("flex items-center justify-center", className)}>
+    <div className={cn("flex", className)}> {/* Removed items-center and justify-center */}
       <img
         src="/NQH.png"
         alt="NQH Logo"
