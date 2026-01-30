@@ -5,7 +5,6 @@ import TableOfContents from "@/components/TableOfContents";
 import MobileMenu from "@/components/MobileMenu";
 import ProfileImage from "@/components/ProfileImage";
 import ImageModal from "@/components/ImageModal";
-import Logo from "@/components/Logo";
 import { cn } from "@/lib/utils";
 
 
@@ -80,7 +79,7 @@ const Biography = () => {
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl font-sans"> {/* Removed grid classes from here */}
       <div className="flex justify-start mb-8"> {/* New wrapper for logo, left-aligned */}
-        <Logo />
+        {/* <Logo /> Removed the Logo component */}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-12"> {/* Main content grid */}
@@ -204,15 +203,8 @@ const Biography = () => {
                       <div className="mb-6">
                         <p className="font-semibold text-xl text-foreground">Reserve Officer Training Unit (ROTU) <span className="text-base font-normal text-muted-foreground float-right">2023 - Present</span></p>
                         <div className="flex flex-col md:flex-row items-center md:items-start gap-6 my-4">
-                          <div className="flex-shrink-0">
-                            <img
-                              src="/rotu.jpg"
-                              alt="Reserve Officer Training Unit (ROTU)"
-                              className="w-48 h-48 object-cover rounded-lg shadow-md cursor-pointer transition-transform duration-200 hover:scale-105"
-                              onClick={() => openImageModal("/rotu.jpg", "Reserve Officer Training Unit (ROTU)")}
-                            />
-                          </div>
-                          <div className="flex-grow">
+                          {/* Removed the image and its container div */}
+                          <div className="flex-grow"> {/* This div now takes full width */}
                             {renderBulletPoints([
                               "Been through three years training as an Air force reserve officer cadet.",
                               "Follow the orders strictly and execute it with full of compliance.",
